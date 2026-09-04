@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>校园网登录器</title>
+    <link type="image/png" rel="shortcut icon" href="./favicon.png?v=2" />
+    <link rel="stylesheet" href="./style.css?v=2" />
+  </head>
+
+  <body>
+    <!-- Title Bar -->
+    <header class="title-bar pywebview-drag-region">
+      <div class="title-bar-left">
+        <svg class="app-icon-svg" viewBox="0 0 32 32" width="26" height="26" fill="none" title="深澜校园网极速版 (Super-S)">
+          <rect x="5.5" y="5.5" width="22" height="22" rx="5" fill="#4ecdc4" stroke="#2c2c2c" stroke-width="1.8" />
+          <rect x="3.5" y="3.5" width="22" height="22" rx="5" fill="#ffffff" stroke="#2c2c2c" stroke-width="2.2" />
+          
+          <!-- Yellow Highlights -->
+          <path d="M9.5 9.5 L14.5 6.5 L19.5 9.5 V13.5 L14.5 15.5 L9.5 13.5 Z" fill="#ffd93d" />
+          <path d="M9.5 15.5 L14.5 13.5 L19.5 15.5 V19.5 L14.5 22.5 L9.5 19.5 Z" fill="#ffd93d" />
+
+          <!-- Super-S Geometric Doodle Lines -->
+          <g stroke="#2c2c2c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.5 9.5 L14.5 6.5 L19.5 9.5" />
+            <line x1="9.5" y1="9.5" x2="9.5" y2="13.5" />
+            <line x1="14.5" y1="9.5" x2="14.5" y2="13.5" />
+            <line x1="19.5" y1="9.5" x2="19.5" y2="13.5" />
+            
+            <line x1="9.5" y1="13.5" x2="14.5" y2="15.5" />
+            <line x1="14.5" y1="13.5" x2="19.5" y2="15.5" />
+            <line x1="19.5" y1="13.5" x2="17.0" y2="14.5" />
+            <line x1="9.5" y1="15.5" x2="12.0" y2="14.5" />
+            
+            <line x1="9.5" y1="15.5" x2="9.5" y2="19.5" />
+            <line x1="14.5" y1="15.5" x2="14.5" y2="19.5" />
+            <line x1="19.5" y1="15.5" x2="19.5" y2="19.5" />
+            <path d="M9.5 19.5 L14.5 22.5 L19.5 19.5" />
+          </g>
+          
+          <!-- Doodle Sparkle -->
+          <path d="M23.5 3.5L24.1 5L25.5 5.6L24.1 6.2L23.5 7.7L22.9 6.2L21.5 5.6L22.9 5Z" fill="#ff6b6b" stroke="#2c2c2c" stroke-width="0.8" />
+        </svg>
+        <span class="app-title">校园网登录器</span>
+      </div>
+
+      <div class="title-bar-actions no-drag">
+        <button class="icon-btn" id="btn-self-service" title="自服务门户" onclick="startSelfService()">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </button>
+        <button class="icon-btn" id="btn-refresh" title="刷新状态 (Ctrl+R)" onclick="handleManualRefresh()">
+          <svg id="refresh-icon-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+        <button class="icon-btn" id="btn-accounts" title="用户管理" onclick="openAccountManager()">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <button class="icon-btn" id="btn-logs" title="运行日志" onclick="openLogsModal()">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </button>
+        <button class="icon-btn" id="btn-settings" title="网关与网络设置" onclick="openSettings()">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+        <div class="window-controls">
+          <button class="win-btn win-min" title="最小化" onclick="window.pywebview.api.minimize_window()">
+            <svg viewBox="0 0 10 2" width="10" height="2"><line x1="0" y1="1" x2="10" y2="1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line></svg>
+          </button>
+          <button class="win-btn win-close" title="收至托盘" onclick="window.pywebview.api.close_window()">
+            <svg viewBox="0 0 10 10" width="10" height="10">
+              <line x1="1.5" y1="1.5" x2="8.5" y2="8.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+              <line x1="8.5" y1="1.5" x2="1.5" y2="8.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+      <!-- Core Doodle Card with Attached Memo Tab -->
+      <section class="doodle-card" id="auth-panel" data-state="offline">
+        <!-- Integrated Memo Index Tab -->
+        <div class="memo-tab" id="status-badge" data-state="offline">
+          <span class="status-dot"></span>
+          <span class="status-label" id="status-badge-text">未连接校园网</span>
+        </div>
+        <!-- 1. Offline Mode: Login Form -->
+        <div class="panel-view" id="view-offline">
+          <div class="form-item">
+            <div class="field-label-row">
+              <label class="field-label" for="username">账号</label>
+              <button type="button" class="text-link-btn" id="link-manage-users" onclick="openAccountManager()">用户管理</button>
+            </div>
+            <div class="input-with-action">
+              <input type="text" id="username" placeholder="校园网账号 / 学号" autocomplete="username" spellcheck="false" />
+              <button type="button" class="account-select-btn" id="btn-account-dropdown" title="用户管理 / 快速切换" onclick="openAccountManager()">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <label class="field-label" for="password">密码</label>
+            <div class="input-with-action">
+              <input type="password" id="password" placeholder="认证密码" autocomplete="current-password" spellcheck="false" />
+              <button type="button" class="password-toggle-btn" id="btn-toggle-pwd" title="显示/隐藏密码" onclick="togglePasswordVisibility()">
+                <svg id="eye-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="switches-row">
+            <div class="switch-item" id="auto-login" data-state="unselected" onclick="toggleSwitch(this)">
+              <span class="switch-track"><span class="switch-thumb"></span></span>
+              <span class="switch-text">自动登录</span>
+            </div>
+            <div class="switch-item" id="auto-start" data-state="unselected" onclick="toggleSwitch(this)">
+              <span class="switch-track"><span class="switch-thumb"></span></span>
+              <span class="switch-text">开机自启</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Online Mode: Clean Metric List -->
+        <div class="panel-view" id="view-online">
+          <div class="metric-list">
+            <div class="metric-row">
+              <span class="metric-label">当前账号</span>
+              <span class="metric-val highlight" id="username-text">--</span>
+            </div>
+
+            <div class="metric-row clickable" onclick="copyOnlineIP()" title="点击复制出口 IP">
+              <span class="metric-label">出口 IP</span>
+              <div class="copyable-val">
+                <span class="metric-val" id="ip-address">--</span>
+                <svg class="copy-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#2c2c2c" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="metric-row">
+              <span class="metric-label">已用流量</span>
+              <span class="metric-val" id="used-flow">0.00 MB</span>
+            </div>
+
+            <div class="metric-row">
+              <span class="metric-label">账户余额</span>
+              <span class="metric-val balance-tag" id="balance-last">0.00 元</span>
+            </div>
+
+            <div class="metric-row">
+              <span class="metric-label">在线时长</span>
+              <span class="metric-val" id="online-time">0 分钟</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Controls -->
+      <footer class="app-footer">
+        <div class="custom-dropdown-wrap" id="nic-dropdown-wrap">
+          <button type="button" class="custom-dropdown-trigger" id="nic-dropdown-trigger" onclick="toggleNicDropdown(event)" aria-haspopup="listbox" aria-expanded="false">
+            <span class="nic-label">网络出口</span>
+            <span class="dropdown-selected-text" id="nic-selected-text">默认路由 (自动)</span>
+            <svg class="dropdown-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#2c2c2c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="custom-dropdown-menu" id="nic-dropdown-menu" role="listbox"></div>
+        </div>
+
+        <button class="doodle-btn-primary" id="main-action-btn" onclick="submit()">
+          <span class="btn-spinner" id="btn-spinner"></span>
+          <span class="btn-text" id="main-btn-text">连接校园网</span>
+        </button>
+      </footer>
+    </main>
+
+    <!-- Settings Modal -->
+    <div class="modal-backdrop" id="settings-mask" style="display: none;">
+      <div class="modal-window">
+        <div class="modal-header">
+          <span class="modal-title">网关与网络设置</span>
+          <button class="icon-btn-close" onclick="closeSettings()" title="关闭 (Esc)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#2c2c2c" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Step 1: Gateway & Self-service -->
+          <div class="wizard-step active" id="settings-step-gateway">
+            <div class="input-field">
+              <label>深澜网关地址</label>
+              <input type="text" id="settings-gateway" placeholder="例如 gw.example.edu.cn" spellcheck="false" />
+            </div>
+
+            <div class="input-field">
+              <label>自服务门户地址</label>
+              <input type="text" id="settings-self-service" placeholder="例如 https://192.168.57.33:8800/home" spellcheck="false" />
+            </div>
+
+            <div class="settings-options-card">
+              <div class="settings-switches-row">
+                <div class="switch-item" id="settings-auto-start" data-state="unselected" onclick="toggleSwitch(this); handleSettingsAutoStartSync(this);">
+                  <span class="switch-track"><span class="switch-thumb"></span></span>
+                  <span class="switch-text">开机自启</span>
+                </div>
+                <div class="switch-item" id="settings-auto-reconnect" data-state="unselected" onclick="toggleSwitch(this); handleSettingsAutoReconnectToggle(this);">
+                  <span class="switch-track"><span class="switch-thumb"></span></span>
+                  <span class="switch-text">断线重连</span>
+                </div>
+              </div>
+
+              <div class="settings-interval-row" id="settings-interval-wrap">
+                <span class="interval-label">检测间隔</span>
+                <div class="interval-input-group">
+                  <input type="number" id="settings-sleeptime" min="2" max="300" value="5" />
+                  <span class="interval-unit">秒</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="wizard-notice" id="settings-probe-status">点击下方按钮将检查网关连通性</div>
+          </div>
+
+          <!-- Step 2: NIC Interface Selection -->
+          <div class="wizard-step" id="settings-step-ip">
+            <div class="step-label">选择参与绑定的网络接口：</div>
+            <div class="probe-list" id="settings-probe-results"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-danger-doodle" id="settings-btn-reset" onclick="handleResetConfig()">重置配置</button>
+          <div class="modal-actions-right">
+            <button class="btn-secondary-doodle hidden" id="settings-action-back" onclick="backSettingsStep()">上一步</button>
+            <button class="btn-secondary-doodle hidden" id="settings-action-refresh" onclick="refreshSettingsProbe()">重新检测</button>
+            <button class="btn-primary-doodle" id="settings-action-next" onclick="proceedSettingsStep()">下一步</button>
+            <button class="btn-primary-doodle hidden" id="settings-action-save" onclick="saveSettings()">保存配置</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Manager Modal -->
+    <div class="modal-backdrop" id="accounts-mask" style="display: none;">
+      <div class="modal-window account-modal-window">
+        <div class="modal-header">
+          <span class="modal-title">用户管理</span>
+          <button class="icon-btn-close" onclick="closeAccountManager()">
+            <svg viewBox="0 0 12 12" width="12" height="12">
+              <line x1="1" y1="1" x2="11" y2="11" stroke="#2c2c2c" stroke-width="2"></line>
+              <line x1="11" y1="1" x2="1" y2="11" stroke="#2c2c2c" stroke-width="2"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body account-modal-body">
+          <div class="account-cards-list" id="account-cards-container">
+            <!-- Dynamically populated cards -->
+          </div>
+          <button class="btn-secondary-doodle add-account-bar" onclick="openAccountEditor()">+ 添加新账号</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Editor Modal (Add/Edit) -->
+    <div class="modal-backdrop" id="account-editor-mask" style="display: none;">
+      <div class="modal-window account-editor-window">
+        <div class="modal-header">
+          <span class="modal-title" id="account-editor-title">添加账号</span>
+          <button class="icon-btn-close" onclick="closeAccountEditor()">
+            <svg viewBox="0 0 12 12" width="12" height="12">
+              <line x1="1" y1="1" x2="11" y2="11" stroke="#2c2c2c" stroke-width="2"></line>
+              <line x1="11" y1="1" x2="1" y2="11" stroke="#2c2c2c" stroke-width="2"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="input-field">
+            <label>账号 / 学号</label>
+            <input type="text" id="editor-username" placeholder="请输入校园网账号" spellcheck="false" />
+          </div>
+
+          <div class="input-field">
+            <label>密码</label>
+            <input type="password" id="editor-password" placeholder="输入密码 (编辑时留空保留原密码)" spellcheck="false" />
+          </div>
+
+          <div class="input-field">
+            <label>备注名称 (选填)</label>
+            <input type="text" id="editor-remark" placeholder="如：主账号、宿舍备用、室友" spellcheck="false" />
+          </div>
+
+          <div class="settings-options-card" style="margin-top: 4px;">
+            <div class="settings-switches-row">
+              <div class="switch-item" id="editor-autologin" data-state="unselected" onclick="toggleSwitch(this)">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="switch-text">该账号自动登录</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div></div>
+          <div class="modal-actions-right">
+            <button class="btn-secondary-doodle" onclick="closeAccountEditor()">取消</button>
+            <button class="btn-primary-doodle" onclick="saveAccountFromEditor()">保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logs Modal (Hand-drawn Centered Modal Window) -->
+    <div class="modal-backdrop" id="logs-mask" style="display: none; z-index: 1050;">
+      <div class="modal-window logs-modal-window">
+        <div class="modal-header">
+          <h3 class="modal-title" id="logs-modal-title">实时运行日志</h3>
+          <button class="icon-btn-close" onclick="closeLogsModal()" title="关闭 (Esc)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Filter Pills Bar -->
+        <div class="logs-filter-bar">
+          <button type="button" class="log-filter-pill active" id="pill-filter-all" data-filter="all" onclick="setLogFilter('all')">
+            全部 <span class="filter-badge" id="badge-count-all">0</span>
+          </button>
+          <button type="button" class="log-filter-pill" id="pill-filter-error" data-filter="error" onclick="setLogFilter('error')">
+            错误与告警 <span class="filter-badge badge-error" id="badge-count-error">0</span>
+          </button>
+          <button type="button" class="log-filter-pill" id="pill-filter-event" data-filter="event" onclick="setLogFilter('event')">
+            重连与事件 <span class="filter-badge badge-event" id="badge-count-event">0</span>
+          </button>
+        </div>
+
+        <div class="modal-body logs-modal-body">
+          <div class="logs-console-box" id="logs-console-box">
+            <div class="logs-empty-tip">暂无运行日志</div>
+          </div>
+        </div>
+
+        <div class="modal-footer logs-modal-footer">
+          <div class="logs-footer-left">
+            <button type="button" class="btn-secondary-doodle" onclick="copyLogsToClipboard()">一键复制</button>
+            <button type="button" class="btn-secondary-doodle" onclick="clearLogs()">清空日志</button>
+          </div>
+          <div class="modal-actions-right">
+            <button type="button" class="btn-primary-doodle" onclick="closeLogsModal()">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert / Confirm Dialog -->
+    <div class="dialog-backdrop" id="dialog-mask" style="display: none;">
+      <div class="dialog-card">
+        <div class="dialog-msg" id="dialog-msg">提示信息</div>
+        <div class="dialog-actions">
+          <button class="btn-secondary-doodle" id="dialog-btn-cancel" onclick="closeDialog(false)">取消</button>
+          <button class="btn-secondary-doodle" id="dialog-btn-alt" style="display: none;" onclick="closeDialog('alt')">仅切换默认</button>
+          <button class="btn-primary-doodle" id="dialog-btn-confirm" onclick="closeDialog(true)">确定</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Mini Toast -->
+    <div class="mini-toast" id="mini-toast"></div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

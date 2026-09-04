@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Memo Pad Hard Offset Marker Teal Shadow -->
+  <rect x="11" y="7" width="46" height="52" rx="6" fill="#4ecdc4" />
+  
+  <!-- Memo Pad Main Body Paper White -->
+  <rect x="8" y="4" width="46" height="52" rx="6" fill="#ffffff" stroke="#2c2c2c" stroke-width="3" />
+  
+  <!-- Left Wire Rings (Spiral Loops) -->
+  <rect x="4" y="12" width="7" height="3" rx="1.5" fill="#ffffff" stroke="#2c2c2c" stroke-width="2" />
+  <rect x="4" y="24" width="7" height="3" rx="1.5" fill="#ffffff" stroke="#2c2c2c" stroke-width="2" />
+  <rect x="4" y="36" width="7" height="3" rx="1.5" fill="#ffffff" stroke="#2c2c2c" stroke-width="2" />
+  <rect x="4" y="48" width="7" height="3" rx="1.5" fill="#ffffff" stroke="#2c2c2c" stroke-width="2" />
+  
+  <!-- Hand-Drawn Bold S - Warm Yellow Marker Accent Underlay -->
+  <path d="M43 21C43 14 38 11 31 11C23 11 18 15 18 21C18 29 44 29.5 44 40C44 47 38 50 30 50C22 50 17 45.5 17 40" 
+        stroke="#ffd93d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="translate(1.5, 1.5)" />
+        
+  <!-- Hand-Drawn Bold S - Teal Marker Layer -->
+  <path d="M43 21C43 14 38 11 31 11C23 11 18 15 18 21C18 29 44 29.5 44 40C44 47 38 50 30 50C22 50 17 45.5 17 40" 
+        stroke="#4ecdc4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+        
+  <!-- Hand-Drawn Ink Accent Outline -->
+  <path d="M43 21C43 14 38 11 31 11C23 11 18 15 18 21C18 29 44 29.5 44 40C44 47 38 50 30 50C22 50 17 45.5 17 40" 
+        stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        
+  <!-- Top-Right Four-Point Doodle Star Sparkle -->
+  <path d="M57 2L58.5 6L62.5 7.5L58.5 9L57 13L55.5 9L51.5 7.5L55.5 6Z" fill="#ffd93d" stroke="#2c2c2c" stroke-width="1.8" />
+  
+  <!-- Bottom Corner Dot -->
+  <circle cx="50" cy="51" r="2" fill="#ff6b6b" stroke="#2c2c2c" stroke-width="1.2" />
+</svg>

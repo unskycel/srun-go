@@ -1,0 +1,19 @@
+# Compiled binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Compiled object files
+*.syso
+
+# AI Steering & Rules (Excluded by user)
+.cursorrules
+GEMINI.md
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

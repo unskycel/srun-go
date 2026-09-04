@@ -1,0 +1,820 @@
+{
+  "sencode_vectors": [
+    {
+      "input": "",
+      "append_len": true,
+      "output_words": [
+        0
+      ]
+    },
+    {
+      "input": "",
+      "append_len": false,
+      "output_words": []
+    },
+    {
+      "input": "a",
+      "append_len": true,
+      "output_words": [
+        97,
+        1
+      ]
+    },
+    {
+      "input": "a",
+      "append_len": false,
+      "output_words": [
+        97
+      ]
+    },
+    {
+      "input": "ab",
+      "append_len": true,
+      "output_words": [
+        25185,
+        2
+      ]
+    },
+    {
+      "input": "ab",
+      "append_len": false,
+      "output_words": [
+        25185
+      ]
+    },
+    {
+      "input": "abc",
+      "append_len": true,
+      "output_words": [
+        6513249,
+        3
+      ]
+    },
+    {
+      "input": "abc",
+      "append_len": false,
+      "output_words": [
+        6513249
+      ]
+    },
+    {
+      "input": "abcd",
+      "append_len": true,
+      "output_words": [
+        1684234849,
+        4
+      ]
+    },
+    {
+      "input": "abcd",
+      "append_len": false,
+      "output_words": [
+        1684234849
+      ]
+    },
+    {
+      "input": "12345678",
+      "append_len": true,
+      "output_words": [
+        875770417,
+        943142453,
+        8
+      ]
+    },
+    {
+      "input": "12345678",
+      "append_len": false,
+      "output_words": [
+        875770417,
+        943142453
+      ]
+    },
+    {
+      "input": "hello world",
+      "append_len": true,
+      "output_words": [
+        1819043176,
+        1870078063,
+        6581362,
+        11
+      ]
+    },
+    {
+      "input": "hello world",
+      "append_len": false,
+      "output_words": [
+        1819043176,
+        1870078063,
+        6581362
+      ]
+    },
+    {
+      "input": "srun_bx1",
+      "append_len": true,
+      "output_words": [
+        1853190771,
+        829973087,
+        8
+      ]
+    },
+    {
+      "input": "srun_bx1",
+      "append_len": false,
+      "output_words": [
+        1853190771,
+        829973087
+      ]
+    },
+    {
+      "input": "admin@buaa.edu.cn",
+      "append_len": true,
+      "output_words": [
+        1768776801,
+        1969373294,
+        1697538401,
+        1663989092,
+        110,
+        17
+      ]
+    },
+    {
+      "input": "admin@buaa.edu.cn",
+      "append_len": false,
+      "output_words": [
+        1768776801,
+        1969373294,
+        1697538401,
+        1663989092,
+        110
+      ]
+    },
+    {
+      "input": "{\"username\":\"20211234\"}",
+      "append_len": true,
+      "output_words": [
+        1937056379,
+        1634628197,
+        975332717,
+        842019362,
+        858927409,
+        8200756,
+        23
+      ]
+    },
+    {
+      "input": "{\"username\":\"20211234\"}",
+      "append_len": false,
+      "output_words": [
+        1937056379,
+        1634628197,
+        975332717,
+        842019362,
+        858927409,
+        8200756
+      ]
+    },
+    {
+      "input": "Special_!@#$%^&*()_+~`",
+      "append_len": true,
+      "output_words": [
+        1667592275,
+        1600938345,
+        606289953,
+        707157541,
+        727656744,
+        24702,
+        22
+      ]
+    },
+    {
+      "input": "Special_!@#$%^&*()_+~`",
+      "append_len": false,
+      "output_words": [
+        1667592275,
+        1600938345,
+        606289953,
+        707157541,
+        727656744,
+        24702
+      ]
+    },
+    {
+      "input": "0123456789abcdefghijklmnopqrstuvwxyz",
+      "append_len": true,
+      "output_words": [
+        858927408,
+        926299444,
+        1650538808,
+        1717920867,
+        1785292903,
+        1852664939,
+        1920036975,
+        1987409011,
+        2054781047,
+        36
+      ]
+    },
+    {
+      "input": "0123456789abcdefghijklmnopqrstuvwxyz",
+      "append_len": false,
+      "output_words": [
+        858927408,
+        926299444,
+        1650538808,
+        1717920867,
+        1785292903,
+        1852664939,
+        1920036975,
+        1987409011,
+        2054781047
+      ]
+    }
+  ],
+  "custom_base64_vectors": [
+    {
+      "input": "",
+      "output": ""
+    },
+    {
+      "input": "a",
+      "output": "Z+=="
+    },
+    {
+      "input": "ab",
+      "output": "Za2="
+    },
+    {
+      "input": "abc",
+      "output": "ZaRk"
+    },
+    {
+      "input": "abcd",
+      "output": "ZaRk1L=="
+    },
+    {
+      "input": "admin",
+      "output": "ZahfOaD="
+    },
+    {
+      "input": "hello world",
+      "output": "OCubWC4SnI5xWC+="
+    },
+    {
+      "input": "srun_bx1",
+      "output": "M7RjWp5XrJP="
+    },
+    {
+      "input": "password123",
+      "output": "MCizM7nwMU+69k9="
+    },
+    {
+      "input": "LVoJPiCN2R8G90yg+hmFHuacZ1OWMnrsSTXkYpUq/3dlbfKwv6xztjI7DeBE45QA",
+      "output": "Fi1wmpV3+tDxHkTNyFVe1xf/WH12naikakigutjKMq0FuiTlacVuMm4z1C6X1Yf7nk1DrqhdmFnP1HRi0Juh++=="
+    },
+    {
+      "input": "1234567890",
+      "output": "9F2z0JHI0zSe9L=="
+    },
+    {
+      "input": "Special!@#$%^&*()_+",
+      "output": "H7VpZIpTWoiL2x+pcXZd8ops8v=="
+    },
+    {
+      "input": "Quick brown fox jumps over lazy dog",
+      "output": "Hcu3ZIbSZqRwnIDS1U5D2C3jWcVz2C5I1c2SWCiBrmVYWIM="
+    },
+    {
+      "input": "{\"action\":\"login\",\"username\":\"test\"}",
+      "output": "rxRTZ7h3WIDXyXRbWIn3WX2b2quz1cRKZajp2k/XnCuznoR5"
+    },
+    {
+      "input": "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f",
+      "output": "LLPoLv+iVSM2o+/GJLtyJv=="
+    }
+  ],
+  "md5_hmac_vectors": [
+    {
+      "password": "password123",
+      "token": "bb983c27e4e1a0b345f7823901acde45",
+      "output": "8d3d276efabbb7bd62b796b777cf981b"
+    },
+    {
+      "password": "admin",
+      "token": "12345678901234567890123456789012",
+      "output": "bb201180445a796682e1c16ae45842c3"
+    },
+    {
+      "password": "secret_pass!#$",
+      "token": "token_sample_1234567890abcdef12",
+      "output": "23d6472a08d0ea1b2e9689fffcd3b267"
+    },
+    {
+      "password": "",
+      "token": "bb983c27e4e1a0b345f7823901acde45",
+      "output": "7b5b2daaa51b55b507ddf6875a13cc2a"
+    },
+    {
+      "password": "password123",
+      "token": "",
+      "output": "bd13aacaae946190843b4b35b9bd1b46"
+    },
+    {
+      "password": "complex_password_with_long_characters_1234567890",
+      "token": "a1b2c3d4e5f60718293a4b5c6d7e8f90",
+      "output": "ca5a599654a301164f5b3c8eeca7ae08"
+    },
+    {
+      "password": "123456",
+      "token": "tok123",
+      "output": "61e2f95abcf9244cf0673aec80666769"
+    },
+    {
+      "password": "root_pass",
+      "token": "9876543210abcdef9876543210abcdef",
+      "output": "e10a93a37f9de7e273d6c21a56ea0ab2"
+    }
+  ],
+  "xencode_vectors": [
+    {
+      "msg": "",
+      "key": "token123",
+      "output_bytes": [],
+      "output_hex": "",
+      "output_custom_b64": ""
+    },
+    {
+      "msg": "1",
+      "key": "123456",
+      "output_bytes": [
+        192,
+        208,
+        110,
+        110,
+        30,
+        249,
+        239,
+        60
+      ],
+      "output_hex": "c0d06e6e1ef9ef3c",
+      "output_custom_b64": "v0VKWTEeEzv="
+    },
+    {
+      "msg": "hello",
+      "key": "token_1234567890",
+      "output_bytes": [
+        26,
+        12,
+        223,
+        171,
+        16,
+        0,
+        207,
+        186,
+        56,
+        200,
+        226,
+        124
+      ],
+      "output_hex": "1a0cdfab1000cfba38c8e27c",
+      "output_custom_b64": "CSzsd6LLzE/DxyR4"
+    },
+    {
+      "msg": "hello world",
+      "key": "4f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1f",
+      "output_bytes": [
+        43,
+        99,
+        202,
+        242,
+        65,
+        71,
+        212,
+        209,
+        128,
+        93,
+        133,
+        77,
+        98,
+        148,
+        248,
+        30
+      ],
+      "output_hex": "2b63caf24147d4d1805d854d6294f81e",
+      "output_custom_b64": "8Ig84YiNj0CLcZu0Z3FDNS=="
+    },
+    {
+      "msg": "admin:123456",
+      "key": "challenge_key_token_1234567890",
+      "output_bytes": [
+        209,
+        148,
+        220,
+        128,
+        152,
+        139,
+        98,
+        30,
+        210,
+        214,
+        77,
+        229,
+        110,
+        127,
+        195,
+        230
+      ],
+      "output_hex": "d194dc80988b621ed2d64de56e7fc3e6",
+      "output_custom_b64": "t1FMSRXGZTEmjY7pWqAJeS=="
+    },
+    {
+      "msg": "{\"username\":\"20211234\",\"password\":\"password123\",\"ip\":\"10.200.21.50\",\"acid\":\"1\",\"enc_ver\":\"srun_bx1\"}",
+      "key": "bb983c27e4e1a0b345f7823901acde45",
+      "output_bytes": [
+        85,
+        237,
+        93,
+        77,
+        171,
+        227,
+        176,
+        173,
+        60,
+        110,
+        38,
+        172,
+        128,
+        65,
+        123,
+        233,
+        197,
+        56,
+        173,
+        36,
+        32,
+        16,
+        87,
+        206,
+        94,
+        191,
+        8,
+        246,
+        224,
+        252,
+        238,
+        91,
+        151,
+        49,
+        71,
+        100,
+        102,
+        23,
+        241,
+        203,
+        155,
+        203,
+        146,
+        179,
+        131,
+        81,
+        163,
+        132,
+        180,
+        170,
+        103,
+        220,
+        11,
+        173,
+        183,
+        61,
+        46,
+        48,
+        174,
+        166,
+        139,
+        14,
+        47,
+        63,
+        244,
+        1,
+        51,
+        177,
+        140,
+        47,
+        25,
+        68,
+        83,
+        196,
+        22,
+        249,
+        101,
+        52,
+        150,
+        128,
+        57,
+        83,
+        205,
+        44,
+        33,
+        255,
+        114,
+        57,
+        108,
+        137,
+        2,
+        241,
+        187,
+        129,
+        53,
+        183,
+        61,
+        86,
+        237,
+        222,
+        26,
+        68,
+        90,
+        53
+      ],
+      "output_hex": "55ed5d4dabe3b0ad3c6e26ac80417be9c538ad24201057ce5ebf08f6e0fcee5b973147646617f1cb9bcb92b38351a384b4aa67dc0badb73d2e30aea68b0e2f3ff40133b18c2f194453c416f9653496803953cd2c21ff72396c8902f1bb8135b73d56edde1a445a35",
+      "output_custom_b64": "urjnFOwkb8t4WXObSPiEBMHDlm+SPisycl425KJ4EpKc9HnY1Ts6xewGYlyJHOyPf83q7LKffztK98BUXvDwgA+V9EC9G6pPH4+aQaHtp/LeH4tb2s5xyaxRLwCESFa7guWf7T3PakH="
+    },
+    {
+      "msg": "short",
+      "key": "k",
+      "output_bytes": [
+        166,
+        137,
+        164,
+        247,
+        87,
+        88,
+        117,
+        83,
+        199,
+        28,
+        31,
+        93
+      ],
+      "output_hex": "a689a4f757587553c71c1f5d",
+      "output_custom_b64": "3/UY5jnZnugNNV5n"
+    },
+    {
+      "msg": "test",
+      "key": "1234",
+      "output_bytes": [
+        117,
+        107,
+        100,
+        123,
+        253,
+        229,
+        208,
+        44
+      ],
+      "output_hex": "756b647bfde5d02c",
+      "output_custom_b64": "nafYrA7ptov="
+    },
+    {
+      "msg": "longer_payload_with_multiple_blocks_of_data_for_xxtea_testing",
+      "key": "sample_token_32_bytes_long_1234",
+      "output_bytes": [
+        215,
+        63,
+        154,
+        187,
+        126,
+        119,
+        166,
+        200,
+        61,
+        153,
+        219,
+        36,
+        165,
+        215,
+        83,
+        30,
+        69,
+        16,
+        45,
+        255,
+        84,
+        139,
+        135,
+        34,
+        130,
+        246,
+        253,
+        133,
+        192,
+        196,
+        66,
+        226,
+        236,
+        73,
+        188,
+        181,
+        106,
+        192,
+        168,
+        90,
+        54,
+        121,
+        161,
+        239,
+        153,
+        190,
+        107,
+        145,
+        38,
+        60,
+        70,
+        77,
+        110,
+        191,
+        145,
+        166,
+        152,
+        250,
+        134,
+        206,
+        47,
+        213,
+        70,
+        179,
+        136,
+        180,
+        49,
+        150
+      ],
+      "output_hex": "d73f9abb7e77a6c83d99db24a5d7531e45102dff548b872282f6fd85c0c442e2ec49bcb56ac0a85a3679a1ef99be6b91263c464d6ebf91a698fa86ce2fd546b388b43196",
+      "output_custom_b64": "jzQOK7e73bS5UnbY3nnFNYH+Gs5HXDMXSwW5TMJP+KGbmWxjObo/ak1e/rQ1wUKhRk6CFaBAYOOZQ/WyG5uCbDXt91Z="
+    },
+    {
+      "msg": "edge_case_24_bytes_test",
+      "key": "1234567890123456",
+      "output_bytes": [
+        34,
+        132,
+        216,
+        167,
+        188,
+        212,
+        13,
+        17,
+        228,
+        9,
+        176,
+        143,
+        57,
+        149,
+        53,
+        43,
+        24,
+        75,
+        100,
+        137,
+        204,
+        35,
+        70,
+        43,
+        106,
+        139,
+        112,
+        24
+      ],
+      "output_hex": "2284d8a7bcd40d11e409b08f3995352b184b6489cc23462b6a8b7018",
+      "output_custom_b64": "2/FZ3EzHJhNYoWogy1Hj86TG12q92tZlO/fvCL=="
+    }
+  ],
+  "sha1_vectors": [
+    {
+      "input": "",
+      "output": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    },
+    {
+      "input": "hello",
+      "output": "aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d"
+    },
+    {
+      "input": "17566848000002021123410.200.21.5001756684800000",
+      "output": "9e81d89e32343d90fb95a39e0f8e8b232495660e"
+    },
+    {
+      "input": "bb983c27e4e1a0b345f7823901acde4520211234bb983c27e4e1a0b345f7823901acde458d3d276efabbb7bd62b796b777cf981bbb983c27e4e1a0b345f7823901acde451bb983c27e4e1a0b345f7823901acde4510.200.21.50bb983c27e4e1a0b345f7823901acde45200bb983c27e4e1a0b345f7823901acde451bb983c27e4e1a0b345f7823901acde45{SRBX1}urjnFOwkb8t4WXObSPiEBMHDlm+SPisycl425KJ4EpKc9HnY1Ts6xewGYlyJHOyPf83q7LKffztK98BUXvDwgA+V9EC9G6pPH4+aQaHtp/LeH4tb2s5xyaxRLwCESFa7guWf7T3PakH=",
+      "output": "1409d3d03fb30d9c4914717501cbcd98367c9949"
+    },
+    {
+      "input": "test_sha1_string_1234567890",
+      "output": "12d1afb7bdefdb1e9bb937e14cc84e40183b5f15"
+    },
+    {
+      "input": "srun_gateway_protocol_sha1_test",
+      "output": "117ee0b629b74184961897b963303e59e34f0da2"
+    }
+  ],
+  "dm_sign_vectors": [
+    {
+      "username": "20211234",
+      "ip": "10.200.21.50",
+      "timestamp": 1756684800000,
+      "sign_str": "17566848000002021123410.200.21.5001756684800000",
+      "sign": "9e81d89e32343d90fb95a39e0f8e8b232495660e"
+    },
+    {
+      "username": "student01",
+      "ip": "192.168.1.100",
+      "timestamp": 1700000000000,
+      "sign_str": "1700000000000student01192.168.1.10001700000000000",
+      "sign": "0df7406c67f5a333f5aa69b1aa37c5e658139947"
+    },
+    {
+      "username": "admin",
+      "ip": "172.16.0.5",
+      "timestamp": 1609459200000,
+      "sign_str": "1609459200000admin172.16.0.501609459200000",
+      "sign": "73904b129a22f518d370848a895b11dfbef1c47b"
+    },
+    {
+      "username": "user_test",
+      "ip": "10.0.0.1",
+      "timestamp": 1800000000000,
+      "sign_str": "1800000000000user_test10.0.0.101800000000000",
+      "sign": "2b1e74e39856a699993faf1e874c8ee7be02d6a9"
+    },
+    {
+      "username": "root",
+      "ip": "127.0.0.1",
+      "timestamp": 1750000000000,
+      "sign_str": "1750000000000root127.0.0.101750000000000",
+      "sign": "f1be4a0c66b47fdde061d268a649a272775ee2ce"
+    }
+  ],
+  "full_login_packets": [
+    {
+      "username": "20211234",
+      "password": "password123",
+      "ip": "10.200.21.50",
+      "acid": "1",
+      "token": "bb983c27e4e1a0b345f7823901acde45",
+      "info_json": "{\"username\":\"20211234\",\"password\":\"password123\",\"ip\":\"10.200.21.50\",\"acid\":\"1\",\"enc_ver\":\"srun_bx1\"}",
+      "xencode_hex": "55ed5d4dabe3b0ad3c6e26ac80417be9c538ad24201057ce5ebf08f6e0fcee5b973147646617f1cb9bcb92b38351a384b4aa67dc0badb73d2e30aea68b0e2f3ff40133b18c2f194453c416f9653496803953cd2c21ff72396c8902f1bb8135b73d56edde1a445a35",
+      "info_param": "{SRBX1}urjnFOwkb8t4WXObSPiEBMHDlm+SPisycl425KJ4EpKc9HnY1Ts6xewGYlyJHOyPf83q7LKffztK98BUXvDwgA+V9EC9G6pPH4+aQaHtp/LeH4tb2s5xyaxRLwCESFa7guWf7T3PakH=",
+      "hmd5": "8d3d276efabbb7bd62b796b777cf981b",
+      "chkstr": "bb983c27e4e1a0b345f7823901acde4520211234bb983c27e4e1a0b345f7823901acde458d3d276efabbb7bd62b796b777cf981bbb983c27e4e1a0b345f7823901acde451bb983c27e4e1a0b345f7823901acde4510.200.21.50bb983c27e4e1a0b345f7823901acde45200bb983c27e4e1a0b345f7823901acde451bb983c27e4e1a0b345f7823901acde45{SRBX1}urjnFOwkb8t4WXObSPiEBMHDlm+SPisycl425KJ4EpKc9HnY1Ts6xewGYlyJHOyPf83q7LKffztK98BUXvDwgA+V9EC9G6pPH4+aQaHtp/LeH4tb2s5xyaxRLwCESFa7guWf7T3PakH=",
+      "chksum": "1409d3d03fb30d9c4914717501cbcd98367c9949"
+    },
+    {
+      "username": "testuser",
+      "password": "secret_pass_999",
+      "ip": "10.200.45.12",
+      "acid": "3",
+      "token": "4f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1f",
+      "info_json": "{\"username\":\"testuser\",\"password\":\"secret_pass_999\",\"ip\":\"10.200.45.12\",\"acid\":\"3\",\"enc_ver\":\"srun_bx1\"}",
+      "xencode_hex": "a59df5f062287db35a03398aad9a0d5b2d6ca2c0379ade8bada534f9355991264f4fe190d7ffe189cc882440407aa2c0a8dd472e357b2b1b57595ca1f43fb6dd0159b91a0ce2956f7bf05982036d37b2ae317732ac8a05bd6bdf4bbd909bc7730f2f577d8c7b8b61f7fe9c4d",
+      "info_param": "{SRBX1}317j4C2/sW0OLzU8l1/0axjb/bL7UfBGlOHtQFu1Ym1gFQC+jAATXMx2RPVLrdGLd0jNGkuE86fcauxT5JQI7+i1Kh/9D3uwrAV1SS0f0E8K9cMxl2/iwawsmEI+U4nzJx5csZ6EXIN7A360",
+      "hmd5": "709cc73db48508c6138a7d41c8053932",
+      "chkstr": "4f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1ftestuser4f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1f709cc73db48508c6138a7d41c80539324f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1f34f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1f10.200.45.124f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1f2004f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1f14f8e6c7d9a1b2c3d4e5f6a7b8c9d0e1f{SRBX1}317j4C2/sW0OLzU8l1/0axjb/bL7UfBGlOHtQFu1Ym1gFQC+jAATXMx2RPVLrdGLd0jNGkuE86fcauxT5JQI7+i1Kh/9D3uwrAV1SS0f0E8K9cMxl2/iwawsmEI+U4nzJx5csZ6EXIN7A360",
+      "chksum": "41f80d8013541c3feaf56d2582cde80deefe3152"
+    },
+    {
+      "username": "student_abc",
+      "password": "MyP@ssw0rd!#$",
+      "ip": "192.168.10.25",
+      "acid": "2",
+      "token": "11223344556677889900aabbccddeeff",
+      "info_json": "{\"username\":\"student_abc\",\"password\":\"MyP@ssw0rd!#$\",\"ip\":\"192.168.10.25\",\"acid\":\"2\",\"enc_ver\":\"srun_bx1\"}",
+      "xencode_hex": "17af4bb6844fbfd471265a035668548ea312b1afcbae60e198a4a8c018812fbe52fba989aa97d954c4417c48a9104815d82f04ad8dac50362d56d30d98f4a5c4c6054d70ee4c7fe44bf48d7fd0fc3d45a2292302ae98da9e451fc766a03200f7f1b4fe27c7e811b37346443ac7e007d5",
+      "info_param": "{SRBX1}iB5Gf/hgw5h6Rp/JuUTHkd9mbOAGlUJTU8m/vVXVGEemQBURd3s1u9hVsPX3PPSuIo4PlZIbHJZfuf90Ugmp69ZiFcJKFNAYmAm0s5J4gHaX8m9ol3kOqYHs6IOS9SJ74WFQR4s/PW0zhY+B6QLNj+==",
+      "hmd5": "f0532f44eebcee203c78e78733519960",
+      "chkstr": "11223344556677889900aabbccddeeffstudent_abc11223344556677889900aabbccddeefff0532f44eebcee203c78e7873351996011223344556677889900aabbccddeeff211223344556677889900aabbccddeeff192.168.10.2511223344556677889900aabbccddeeff20011223344556677889900aabbccddeeff111223344556677889900aabbccddeeff{SRBX1}iB5Gf/hgw5h6Rp/JuUTHkd9mbOAGlUJTU8m/vVXVGEemQBURd3s1u9hVsPX3PPSuIo4PlZIbHJZfuf90Ugmp69ZiFcJKFNAYmAm0s5J4gHaX8m9ol3kOqYHs6IOS9SJ74WFQR4s/PW0zhY+B6QLNj+==",
+      "chksum": "b6bc5ae4cfde588587f7ce7fdc61a92643752059"
+    },
+    {
+      "username": "buaa_user_001",
+      "password": "ComplexPass123!@#",
+      "ip": "10.200.1.100",
+      "acid": "1",
+      "token": "abcdef0123456789abcdef0123456789",
+      "info_json": "{\"username\":\"buaa_user_001\",\"password\":\"ComplexPass123!@#\",\"ip\":\"10.200.1.100\",\"acid\":\"1\",\"enc_ver\":\"srun_bx1\"}",
+      "xencode_hex": "a8bc76094766393fb01456eb2e4edd5740465f66950577f3e4154f60c73f906e8b45543cfef5638e430fe5ea7153cc1e5a439026776c7efe151f1859c66a93ffac17af6c1cd23017169aed92f2f47b60ec9f4c2964b482dfe5f5cb47149f9394e6f3fed118d5c39c1e6e45404d37ecbbb4e5f2d3",
+      "info_param": "{SRBX1}dG6IoHnUyFQviiWlGYEnutVCcIOuVcszeVugZ9MAYCBGhu+4AwukkY9ger36H4vraYy+RqnbswDuN6T16UdFABvclIvMtkLci3lfYwGtrIJbqtv31Gmo7QcjxtMHqeyHewgQthkuvevrWYuLFFsbKEFp4f9=",
+      "hmd5": "15577c490ae444a182ce5884d0cde48c",
+      "chkstr": "abcdef0123456789abcdef0123456789buaa_user_001abcdef0123456789abcdef012345678915577c490ae444a182ce5884d0cde48cabcdef0123456789abcdef01234567891abcdef0123456789abcdef012345678910.200.1.100abcdef0123456789abcdef0123456789200abcdef0123456789abcdef01234567891abcdef0123456789abcdef0123456789{SRBX1}dG6IoHnUyFQviiWlGYEnutVCcIOuVcszeVugZ9MAYCBGhu+4AwukkY9ger36H4vraYy+RqnbswDuN6T16UdFABvclIvMtkLci3lfYwGtrIJbqtv31Gmo7QcjxtMHqeyHewgQthkuvevrWYuLFFsbKEFp4f9=",
+      "chksum": "37295a97a98a17032b211e39dedec350090498f9"
+    },
+    {
+      "username": "guest_account",
+      "password": "guest_password_test",
+      "ip": "172.18.3.4",
+      "acid": "5",
+      "token": "99887766554433221100ffeeddccbbaa",
+      "info_json": "{\"username\":\"guest_account\",\"password\":\"guest_password_test\",\"ip\":\"172.18.3.4\",\"acid\":\"5\",\"enc_ver\":\"srun_bx1\"}",
+      "xencode_hex": "137df3464a0f835f3913deb88baa13edd1d52ed4b0b8a2d1b2af5f9c3983d272cc4b14ca8a61527a9c41ec1c60bba3ba4882914266d10817930a3a4ec8c5907e3ade410af73e0604a3da561a1bbdb83d6d23863678063df75bb4328134e10e85541a8108c43d252eab16fe65623cc8c4bc7346b9",
+      "info_param": "{SRBX1}P77zhY/gSj4eP5BDXB/FEnNuGfmvK8Ghbd5sqJUJtqG9m6F8XUimr36VEV6SKByBm28h+UWhoVrFok3yx9a+sklr++l7gSZP/53aCTK5KJjf2DZIrLZ55jKt9/PtD+BiuVdVo9+5RmBliwepZkz26G6zhlY=",
+      "hmd5": "c49ef1d10cf9cd99083db91d5d4a6c08",
+      "chkstr": "99887766554433221100ffeeddccbbaaguest_account99887766554433221100ffeeddccbbaac49ef1d10cf9cd99083db91d5d4a6c0899887766554433221100ffeeddccbbaa599887766554433221100ffeeddccbbaa172.18.3.499887766554433221100ffeeddccbbaa20099887766554433221100ffeeddccbbaa199887766554433221100ffeeddccbbaa{SRBX1}P77zhY/gSj4eP5BDXB/FEnNuGfmvK8Ghbd5sqJUJtqG9m6F8XUimr36VEV6SKByBm28h+UWhoVrFok3yx9a+sklr++l7gSZP/53aCTK5KJjf2DZIrLZ55jKt9/PtD+BiuVdVo9+5RmBliwepZkz26G6zhlY=",
+      "chksum": "e5f44d61223508ed8243f52ce519a96f3211bdab"
+    }
+  ]
+}
