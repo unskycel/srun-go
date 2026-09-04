@@ -23,26 +23,35 @@ jobs:
           go-version: '1.24'
           cache: true
 
-      - name: Build Windows Binaries
+      - name: Install rsrc Tool & Embed Windows Resources
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Path build_out -Force | Out-Null
-          go build -ldflags="-H windowsgui -s -w" -o build_out/srun_windows_amd64.exe ./cmd/srun
-          
-          $env:GOARCH = "386"
-          go build -ldflags="-H windowsgui -s -w" -o build_out/srun_windows_386.exe ./cmd/srun
-          $env:GOARCH = ""
+          go install github.com/akavel/rsrc@latest
+          rsrc -manifest srun.manifest -ico logo.ico -arch amd64 -o cmd/srun/rsrc_windows_amd64.syso
+          rsrc -manifest srun.manifest -ico logo.ico -arch 386 -o cmd/srun/rsrc_windows_386.syso
 
-      - name: Package Archives & Checksums
+      - name: Build Windows Binaries with Embedded Icon
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Path release_assets -Force | Out-Null
-          Compress-Archive -Path build_out/srun_windows_amd64.exe -DestinationPath release_assets/srun-windows-amd64.zip -Force
-          Compress-Archive -Path build_out/srun_windows_386.exe -DestinationPath release_assets/srun-windows-386.zip -Force
+          New-Item -ItemType Directory -Path build_x64, build_x86, release_assets -Force | Out-Null
           
+          # Build 64-bit with embedded icon
+          go build -ldflags="-H windowsgui -s -w" -o build_x64/srun.exe ./cmd/srun
+          Copy-Item build_x64/srun.exe release_assets/srun_windows_amd64.exe
+          Compress-Archive -Path build_x64/srun.exe -DestinationPath release_assets/srun-windows-amd64.zip -Force
+
+          # Build 32-bit with embedded icon
+          $env:GOARCH = "386"
+          go build -ldflags="-H windowsgui -s -w" -o build_x86/srun.exe ./cmd/srun
+          $env:GOARCH = ""
+          Copy-Item build_x86/srun.exe release_assets/srun_windows_386.exe
+          Compress-Archive -Path build_x86/srun.exe -DestinationPath release_assets/srun-windows-386.zip -Force
+
+          # Checksums
           Get-FileHash release_assets/* -Algorithm SHA256 | ForEach-Object {
               "$($_.Hash)  $(Split-Path $_.Path -Leaf)"
           } | Set-Content release_assets/checksums.sha256 -Encoding UTF8
+
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
