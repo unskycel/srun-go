@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build & Release Artifacts
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go SDK
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: true
+
+      - name: Build Windows (amd64)
+        run: |
+          go build -ldflags="-H windowsgui -s -w" -o build_out/srun_windows_amd64.exe ./cmd/srun
+
+      - name: Build Windows (386)
+        run: |
+          $env:GOARCH = "386"
+          go build -ldflags="-H windowsgui -s -w" -o build_out/srun_windows_386.exe ./cmd/srun
+          $env:GOARCH = ""
+
+      - name: Package Archives & Checksums
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path release_assets -Force | Out-Null
+          Compress-Archive -Path build_out/srun_windows_amd64.exe -DestinationPath release_assets/srun-windows-amd64.zip -Force
+          Compress-Archive -Path build_out/srun_windows_386.exe -DestinationPath release_assets/srun-windows-386.zip -Force
+          
+          Get-FileHash release_assets/* -Algorithm SHA256 | ForEach-Object {
+              "$($_.Hash)  $(Split-Path $_.Path -Leaf)"
+          } | Set-Content release_assets/checksums.sha256 -Encoding UTF8
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release_assets/*
+          generate_release_notes: true

@@ -1,0 +1,17 @@
+name: 💡 功能需求 (Feature Request)
+description: 为 srun-go 提出新的功能建议或体验优化
+title: "[FEAT]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 需求描述与使用场景
+      placeholder: 您希望新增什么功能？这个功能解决什么痛点？
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: 您预期的实现方案 (可选)
+      placeholder: 如果有设计构想或参考实现，请在此补充

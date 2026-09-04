@@ -1,0 +1,35 @@
+name: 🐛 Bug 报告 (Bug Report)
+description: 提交程序运行中的缺陷、异常或崩溃问题
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您反馈问题！请尽量详细填写以下内容以便我们快速定位并修复。
+  - type: input
+    id: version
+    attributes:
+      label: srun-go 版本
+      placeholder: 例如 v1.0.0
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: 操作系统与架构
+      placeholder: 例如 Windows 11 23H2 (x64)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题复现步骤与现象
+      placeholder: 请详细描述在什么情况下触发了该问题，实际现象是什么？
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 终端或运行日志 (如有)
+      placeholder: 粘贴相关日志信息
