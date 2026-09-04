@@ -166,6 +166,9 @@ func (a *App) Run() error {
 		}
 	}
 
+	// 1.1 Register Windows AUMID so Notifications and Settings list this application
+	_ = platwin.EnsureAppUserModelIDRegistered("")
+
 	// 2. Start local asset server
 	server, err := StartAssetServer()
 	if err != nil {

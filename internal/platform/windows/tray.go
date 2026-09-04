@@ -96,7 +96,24 @@ var (
 
 	taskbarCreatedMsg  uint32
 	taskbarCreatedOnce sync.Once
+
+	activeTrayMu sync.RWMutex
+	activeTray   *NativeTray
 )
+
+// RegisterActiveTray registers the current running NativeTray instance.
+func RegisterActiveTray(t *NativeTray) {
+	activeTrayMu.Lock()
+	activeTray = t
+	activeTrayMu.Unlock()
+}
+
+// GetActiveTray returns the current active NativeTray instance, if any.
+func GetActiveTray() *NativeTray {
+	activeTrayMu.RLock()
+	defer activeTrayMu.RUnlock()
+	return activeTray
+}
 
 func getTaskbarCreatedMsg() uint32 {
 	taskbarCreatedOnce.Do(func() {
@@ -489,6 +506,7 @@ func RunNativeTray(cfg *TrayConfig) (*NativeTray, error) {
 
 	select {
 	case <-readyChan:
+		RegisterActiveTray(tray)
 		return tray, nil
 	case err := <-errChan:
 		return nil, err
@@ -660,11 +678,40 @@ func (t *NativeTray) showContextMenu() {
 	}
 }
 
+// ShowNotification displays a native Windows balloon / toast notification via the tray icon.
+func (t *NativeTray) ShowNotification(title, message string) error {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	if t.closed || t.hwnd == 0 {
+		return fmt.Errorf("tray is not running")
+	}
+
+	nid := t.nid
+	nid.UFlags = NIF_INFO
+	nid.DwInfoFlags = NIIF_INFO
+
+	titleUTF16, err := windows.UTF16FromString(title)
+	if err == nil {
+		copy(nid.SzInfoTitle[:], titleUTF16)
+	}
+
+	msgUTF16, err := windows.UTF16FromString(message)
+	if err == nil {
+		copy(nid.SzInfo[:], msgUTF16)
+	}
+
+	r, _, callErr := procShellNotifyIconW.Call(uintptr(NIM_MODIFY), uintptr(unsafe.Pointer(&nid)))
+	if r == 0 {
+		return fmt.Errorf("Shell_NotifyIconW failed: %w", callErr)
+	}
+	return nil
+}
+
 // Close removes the tray icon from Windows notification area and destroys its window.
 func (t *NativeTray) Close() {
 	t.mu.Lock()
-	defer t.mu.Unlock()
 	if t.closed {
+		t.mu.Unlock()
 		return
 	}
 	t.closed = true
@@ -672,4 +719,11 @@ func (t *NativeTray) Close() {
 	if t.hwnd != 0 {
 		procPostMessageW.Call(uintptr(t.hwnd), WM_CLOSE, 0, 0)
 	}
+	t.mu.Unlock()
+
+	activeTrayMu.Lock()
+	if activeTray == t {
+		activeTray = nil
+	}
+	activeTrayMu.Unlock()
 }

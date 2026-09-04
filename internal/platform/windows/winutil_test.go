@@ -6,6 +6,8 @@ import (
 	"testing"
 	"time"
 	"unsafe"
+
+	"golang.org/x/sys/windows/registry"
 )
 
 func TestTheme_IsSystemUsesLightTheme(t *testing.T) {
@@ -196,6 +198,31 @@ func TestToast_ShowToastDebounced(t *testing.T) {
 	err2 := ShowToastDebounced(key, "Test 2", "Message 2", 10*time.Second)
 	if err2 != nil {
 		t.Fatalf("ShowToastDebounced call 2 failed: %v", err2)
+	}
+}
+
+func TestToast_EnsureAppUserModelIDRegistered(t *testing.T) {
+	err := EnsureAppUserModelIDRegistered("")
+	if err != nil {
+		t.Fatalf("EnsureAppUserModelIDRegistered failed: %v", err)
+	}
+
+	// Verify registry entry exists in HKCU
+	regPath := `Software\Classes\AppUserModelId\` + DefaultAppID
+	k, err := registry.OpenKey(registry.CURRENT_USER, regPath, registry.QUERY_VALUE)
+	if err != nil {
+		t.Fatalf("failed to open AppUserModelId key: %v", err)
+	}
+	defer k.Close()
+
+	name, _, err := k.GetStringValue("DisplayName")
+	if err != nil || name != "校园网登录器" {
+		t.Errorf("expected DisplayName '校园网登录器', got '%s'", name)
+	}
+
+	show, _, err := k.GetIntegerValue("ShowInSettings")
+	if err != nil || show != 1 {
+		t.Errorf("expected ShowInSettings 1, got %d", show)
 	}
 }
 

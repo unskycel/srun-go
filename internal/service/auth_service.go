@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"strings"
 	"sync"
+	"time"
 
 	"srun/internal/domain/event"
 	"srun/internal/domain/model"
+	"srun/internal/platform/windows"
 	"srun/internal/protocol/srun"
 )
 
@@ -89,6 +91,7 @@ func (s *AuthService) Login(ctx context.Context, targetIP string) (*srun.PortalR
 
 	if res != nil && (res.Error == "ok" || strings.Contains(res.SucMsg, "login_ok") || strings.Contains(res.SucMsg, "successful")) {
 		LogSuccess("账号 [%s] 登录成功！", cfg.Username)
+		_ = windows.ShowToastDebounced("auth_login_ok", "校园网已连接", fmt.Sprintf("账号 %s 认证成功", cfg.Username), 5*time.Second)
 		s.setState(model.StateOnline)
 		_ = s.cfgSvc.Update(func(c *model.Config) {
 			c.PassCorrect = true
@@ -109,6 +112,7 @@ func (s *AuthService) Login(ctx context.Context, targetIP string) (*srun.PortalR
 			}
 		}
 		LogWarn("认证失败: %s", errMsg)
+		_ = windows.ShowToastDebounced("auth_login_fail", "校园网认证失败", fmt.Sprintf("认证失败：%s", errMsg), 5*time.Second)
 		if s.eventBus != nil {
 			s.eventBus.Publish(event.Event{
 				Type:    event.EventAuthFailed,
@@ -129,8 +133,10 @@ func (s *AuthService) Logout(ctx context.Context, targetIP string) (*srun.Portal
 	s.setState(model.StateOffline)
 	if err != nil {
 		LogError("注销请求异常: %v", err)
+		_ = windows.ShowToastDebounced("auth_logout_fail", "校园网注销失败", fmt.Sprintf("注销请求异常: %v", err), 5*time.Second)
 	} else {
 		LogSuccess("账号 [%s] 已注销下线", cfg.Username)
+		_ = windows.ShowToastDebounced("auth_logout_ok", "校园网已注销", fmt.Sprintf("账号 %s 已成功下线", cfg.Username), 5*time.Second)
 	}
 	return res, err
 }
