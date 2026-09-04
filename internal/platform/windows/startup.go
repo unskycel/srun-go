@@ -87,17 +87,17 @@ func resolveExecutablePath(exePath string) (string, error) {
 // When enabled, it registers the application with the argument "--no-auto-open".
 // If exePath is empty, it automatically detects the current running executable.
 func SetAutoStart(enable bool, exePath string) error {
-	k, err := registry.OpenKey(
-		registry.CURRENT_USER,
-		RunRegistryKey,
-		registry.SET_VALUE|registry.QUERY_VALUE,
-	)
-	if err != nil {
-		return fmt.Errorf("failed to open Run registry key: %w", err)
-	}
-	defer k.Close()
-
 	if enable {
+		k, _, err := registry.CreateKey(
+			registry.CURRENT_USER,
+			RunRegistryKey,
+			registry.SET_VALUE|registry.QUERY_VALUE,
+		)
+		if err != nil {
+			return fmt.Errorf("failed to create or open Run registry key: %w", err)
+		}
+		defer k.Close()
+
 		absPath, err := resolveExecutablePath(exePath)
 		if err != nil {
 			return fmt.Errorf("failed to resolve absolute executable path: %w", err)
@@ -116,14 +116,24 @@ func SetAutoStart(enable bool, exePath string) error {
 	}
 
 	// Disable auto-start: clean up registry keys
+	k, err := registry.OpenKey(
+		registry.CURRENT_USER,
+		RunRegistryKey,
+		registry.SET_VALUE|registry.QUERY_VALUE,
+	)
 	var lastErr error
-	if err := k.DeleteValue(AppStartupName); err != nil && err != registry.ErrNotExist {
-		lastErr = err
-	}
-	if err := k.DeleteValue(LegacyAppStartupName); err != nil && err != registry.ErrNotExist {
-		if lastErr == nil {
+	if err == nil {
+		defer k.Close()
+		if err := k.DeleteValue(AppStartupName); err != nil && err != registry.ErrNotExist {
 			lastErr = err
 		}
+		if err := k.DeleteValue(LegacyAppStartupName); err != nil && err != registry.ErrNotExist {
+			if lastErr == nil {
+				lastErr = err
+			}
+		}
+	} else if err != registry.ErrNotExist {
+		lastErr = err
 	}
 
 	// Clean up startup folder shortcuts (current and legacy)
