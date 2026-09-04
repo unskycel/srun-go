@@ -23,12 +23,12 @@ jobs:
           go-version: '1.24'
           cache: true
 
-      - name: Build Windows (amd64)
+      - name: Build Windows Binaries
+        shell: pwsh
         run: |
+          New-Item -ItemType Directory -Path build_out -Force | Out-Null
           go build -ldflags="-H windowsgui -s -w" -o build_out/srun_windows_amd64.exe ./cmd/srun
-
-      - name: Build Windows (386)
-        run: |
+          
           $env:GOARCH = "386"
           go build -ldflags="-H windowsgui -s -w" -o build_out/srun_windows_386.exe ./cmd/srun
           $env:GOARCH = ""
