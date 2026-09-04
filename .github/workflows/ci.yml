@@ -7,12 +7,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
-    name: Test & Build Check (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ windows-latest, ubuntu-latest ]
+  windows-test-and-build:
+    name: Windows Native Tests & Build
+    runs-on: windows-latest
 
     steps:
       - name: Checkout Source Code
@@ -24,8 +21,28 @@ jobs:
           go-version: '1.24'
           cache: true
 
-      - name: Run Unit Tests
+      - name: Run All Tests (Windows)
         run: go test -v ./...
 
-      - name: Build Verification
+      - name: Build Verification (Windows)
         run: go build -v ./...
+
+  linux-cross-compile-check:
+    name: Linux Cross-Compilation & Protocol Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go SDK
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: true
+
+      - name: Run Protocol Tests (Linux)
+        run: go test -v ./internal/protocol/...
+
+      - name: Cross-Compile for Windows (Linux)
+        run: GOOS=windows GOARCH=amd64 go build -v ./...
