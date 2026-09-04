@@ -66,6 +66,50 @@ func TestStartup_ShortcutPaths(t *testing.T) {
 	t.Logf("Startup shortcut path: %s", path)
 }
 
+func TestStartup_SyncAutoStartAndHeal(t *testing.T) {
+	deadExe := `Z:\NonExistent\Folder\dead_srun.exe`
+
+	// 1. Manually write a dead path into registry to simulate old broken desktop path
+	err := SetAutoStart(true, deadExe)
+	if err != nil {
+		t.Fatalf("SetAutoStart with dead path failed: %v", err)
+	}
+	defer func() {
+		_ = SetAutoStart(false, "")
+	}()
+
+	// 2. Dead path should not be healthy
+	if IsAutoStartHealthy("") {
+		t.Errorf("expected dead path to report IsAutoStartHealthy() = false")
+	}
+
+	// 3. Now perform SyncAutoStart to heal it to a real executable
+	realExe, err := resolveExecutablePath("")
+	if err != nil {
+		t.Fatalf("resolveExecutablePath failed: %v", err)
+	}
+
+	err = SyncAutoStart(true, realExe)
+	if err != nil {
+		t.Fatalf("SyncAutoStart(true) failed: %v", err)
+	}
+
+	regExe := GetRegistryStartupExe()
+	if !strings.EqualFold(regExe, realExe) {
+		t.Errorf("expected healed registry exe to be '%s', got '%s'", realExe, regExe)
+	}
+
+	// 4. SyncAutoStart(false) disables cleanly
+	err = SyncAutoStart(false, "")
+	if err != nil {
+		t.Fatalf("SyncAutoStart(false) failed: %v", err)
+	}
+
+	if IsAutoStartEnabled() {
+		t.Errorf("expected auto start to be disabled after SyncAutoStart(false)")
+	}
+}
+
 func TestMutex_SingleInstance(t *testing.T) {
 	uniqueName := fmt.Sprintf("Local\\SRun_Test_Mutex_%d", time.Now().UnixNano())
 

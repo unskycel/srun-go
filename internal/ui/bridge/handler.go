@@ -286,7 +286,15 @@ func (h *BridgeHandler) SetConfig(args []any) (bool, error) {
 	}
 
 	if hasAutoStart {
-		_ = windows.SetAutoStart(autoStart, "")
+		if err := windows.SyncAutoStart(autoStart, ""); err != nil {
+			service.LogWarn("同步开机自启失败: %v", err)
+		} else {
+			if autoStart {
+				service.LogInfo("已开启开机自启并校准启动项路径")
+			} else {
+				service.LogInfo("已关闭开机自启并清理启动项")
+			}
+		}
 	}
 	return true, nil
 }
@@ -389,7 +397,15 @@ func (h *BridgeHandler) UpdateIPSettings(args []any) (bool, error) {
 		return false, err
 	}
 	if hasAutoStart {
-		_ = windows.SetAutoStart(autoStartVal, "")
+		if err := windows.SyncAutoStart(autoStartVal, ""); err != nil {
+			service.LogWarn("同步开机自启失败: %v", err)
+		} else {
+			if autoStartVal {
+				service.LogInfo("已开启开机自启并校准启动项路径")
+			} else {
+				service.LogInfo("已关闭开机自启并清理启动项")
+			}
+		}
 	}
 	return true, nil
 }

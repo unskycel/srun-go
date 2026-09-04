@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"math/rand"
 	"strings"
 	"sync"
@@ -67,6 +68,15 @@ func (d *DaemonService) Start(parentCtx context.Context) {
 	d.cancel = cancel
 
 	go d.loop(ctx)
+	// Initial trigger probe shortly after starting
+	go func() {
+		select {
+		case <-ctx.Done():
+			return
+		case <-time.After(300 * time.Millisecond):
+			d.TriggerCheck()
+		}
+	}()
 }
 
 func (d *DaemonService) Stop() {
@@ -123,6 +133,7 @@ func (d *DaemonService) loop(ctx context.Context) {
 
 			if loginErr == nil && res != nil && (res.Error == "ok" || strings.Contains(res.SucMsg, "login_ok") || strings.Contains(res.SucMsg, "successful")) {
 				LogSuccess("自动重连成功！校园网已恢复在线")
+				_ = windows.ShowToastDebounced("auto_login_ok", "校园网已连接", fmt.Sprintf("已自动连接账号：%s", cfg.Username), 2*time.Minute)
 				failedCount = 0
 				retryBackoffCount = 0
 				d.circuitBreaker.Reset()

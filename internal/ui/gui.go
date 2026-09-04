@@ -180,7 +180,19 @@ func (a *App) Run() error {
 
 	service.LogInfo("校园网客户端启动就绪 (Windows 高清原生版)")
 
-	// 4. Initialize System Tray
+	// 4. Check & auto-heal auto-start entries if configured, or cleanup stale entries
+	cfg := a.cfgSvc.GetConfigCopy()
+	if cfg.StartWithWindows {
+		if err := platwin.SyncAutoStart(true, ""); err != nil {
+			service.LogWarn("自动校准开机自启路径失败: %v", err)
+		} else {
+			service.LogInfo("已检查并确保开机自启路径与当前可执行文件一致")
+		}
+	} else if platwin.IsAutoStartEnabled() {
+		_ = platwin.SyncAutoStart(false, "")
+	}
+
+	// 5. Initialize System Tray
 	a.initSystemTray()
 	defer func() {
 		if a.tray != nil {
@@ -188,7 +200,7 @@ func (a *App) Run() error {
 		}
 	}()
 
-	// 5. Initial window open unless launched with --no-auto-open
+	// 6. Initial window open unless launched with --no-auto-open
 	noAutoOpen := false
 	for _, arg := range os.Args {
 		if arg == "--no-auto-open" {
@@ -196,6 +208,15 @@ func (a *App) Run() error {
 			break
 		}
 	}
+	// If auto-started in background but user hasn't configured any account,
+	// wake the window to guide the user rather than staying completely silent
+	if noAutoOpen {
+		if strings.TrimSpace(cfg.Username) == "" && len(cfg.Accounts) == 0 {
+			service.LogInfo("开机自启检测到尚未配置账号，自动唤起主界面引导配置")
+			noAutoOpen = false
+		}
+	}
+
 	if !noAutoOpen {
 		a.showChan <- struct{}{}
 	} else {
